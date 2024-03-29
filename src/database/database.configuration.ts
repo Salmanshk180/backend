@@ -1,11 +1,16 @@
 import { DataSource } from "typeorm"
-
-export const connection = new DataSource({
+import { database_name, database_password, database_port, database_schema, database_username, databse_host } from "../utils/constants/database.constants";
+import { Users } from "../entities/users/users";
+export const AppDataSource = new DataSource({
     type: "postgres",
-    host:  process.env.DATABASE_HOST,
-    port:  Number(process.env.DATABASE_PORT),
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DATABASENAME,
-    schema: process.env.DATABASE_SCHEMA,
+    host: databse_host,
+    port: database_port,
+    username: database_username,
+    password: database_password,
+    database: database_name,
+    schema: database_schema,
+    entities: [Users],
+    // synchronize: true,
+    logging: true,
+    migrations: ["src/migrations/*.ts"],
 })
