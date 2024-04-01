@@ -4,16 +4,18 @@ import { getAllBrands, handleBrands } from "../controllers/brand/handle-brands.c
 import { getAllCategories, handleCategories } from "../controllers/category/handle-categories.controller";
 import { getAllProducts, handleProducts } from "../controllers/product/handle-product.controller";
 import { getAllUsers } from "../controllers/user/handle-user.controlles";
+import { getAllProductVariants, handleProductVariants } from "../controllers/product/handle-product-variant.controller";
 
 export const router = Router();
 
-
-router.post("/signup",handleSignup)
-router.post("/login",handleLogin)
-router.get("/users",getAllUsers)
-router.post("/brand",handleBrands)
-router.get("/brand",getAllBrands)
-router.post("/category",handleCategories)
-router.get("/category",getAllCategories)
-router.post("/product",handleProducts)
-router.get("/product",getAllProducts)
+router.post("/signup", handleSignup)
+router.post("/login", handleLogin)
+router.get("/users", getAllUsers)
+router.post("/brand", handleBrands)
+router.get("/brand", getAllBrands)
+router.post("/category", handleCategories)
+router.get("/category", getAllCategories)
+router.post("/product", handleProducts)
+router.get("/product", getAllProducts)
+router.post("/product-variant", handleProductVariants)
+router.get("/product-variant", getAllProductVariants)

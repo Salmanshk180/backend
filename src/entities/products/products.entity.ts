@@ -1,7 +1,8 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { Brands } from "../brands/brands.entity";
 import { Categories } from "../categories/categories.entity";
+import { ProductVariants } from "./product-variants.entity";
 
 @Entity()
 export class Products extends BaseEntity {
@@ -29,14 +30,18 @@ export class Products extends BaseEntity {
     updated_at: Date;
 
 
-    @ManyToOne(() => Brands, (brand) => brand.products, { onDelete: "CASCADE" ,eager: true})
+    @ManyToOne(() => Brands, (brand) => brand.products, { onDelete: "CASCADE", eager: true })
     @JoinColumn({ name: "brand_id" })
     brand: Brands
 
-    @ManyToOne(() => Categories, (category) => category.products, { onDelete: "CASCADE", eager: true})
+    @ManyToOne(() => Categories, (category) => category.products, { onDelete: "CASCADE", eager: true })
     @JoinColumn({ name: "category_id" })
     category: Categories
 
+    @OneToMany(() => ProductVariants, (product_variant) => product_variant.product, {
+        cascade: true,
+    })
+    product_variants: ProductVariants[];
 
     constructor() {
         super();

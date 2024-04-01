@@ -1,4 +1,3 @@
-import { Timestamp, UUID } from "typeorm/driver/mongodb/bson.typings";
 
 export interface User {
     id: string;
@@ -11,4 +10,9 @@ export interface User {
     role: string;
     created_at: Date;
     updated_at: Date;
+}
+
+export enum Currency{
+    USD = "USD",
+    INR = "INR",
 }
