@@ -6,6 +6,7 @@ import { HTTP_STATUS_CODES } from "../../utils/constants/status-codes.constants"
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
 import bcrypt from "bcryptjs"
 import { generateToken } from "../../middlewares/auth-token.middlewares";
+
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     try {

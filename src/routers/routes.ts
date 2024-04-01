@@ -1,14 +1,19 @@
 import { Router } from "express";
 import { handleLogin, handleSignup } from "../controllers/authentication/handle-auth.controller";
-import { handleBrands } from "../controllers/brand/handle-brands.controller";
-import { handleCategories } from "../controllers/category/handle-categories.controller";
-import { handleProducts } from "../controllers/product/handle-product.controller";
+import { getAllBrands, handleBrands } from "../controllers/brand/handle-brands.controller";
+import { getAllCategories, handleCategories } from "../controllers/category/handle-categories.controller";
+import { getAllProducts, handleProducts } from "../controllers/product/handle-product.controller";
+import { getAllUsers } from "../controllers/user/handle-user.controlles";
 
 export const router = Router();
 
 
 router.post("/signup",handleSignup)
 router.post("/login",handleLogin)
+router.get("/users",getAllUsers)
 router.post("/brand",handleBrands)
+router.get("/brand",getAllBrands)
 router.post("/category",handleCategories)
+router.get("/category",getAllCategories)
 router.post("/product",handleProducts)
+router.get("/product",getAllProducts)

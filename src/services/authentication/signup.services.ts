@@ -5,6 +5,7 @@ import { AppDataSource } from "../../database/database.configuration";
 import { Users } from "../../entities/users/users.entity";
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
 import bcrypt from "bcryptjs"
+
 export const signup = async (req: Request) => {
     const { firstname, lastname, email, password, role } = req.body;
     try {
