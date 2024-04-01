@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { ERROR_MESSAGE } from "../../utils/constants/error-message.constants";
 import { HTTP_STATUS_CODES } from "../../utils/constants/status-codes.constants";
 import { AppDataSource } from "../../database/database.configuration";
-import { Users } from "../../entities/users/users";
+import { Users } from "../../entities/users/users.entity";
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
 import bcrypt from "bcryptjs"
-export const signup = async (req: Request, res: Response) => {
+export const signup = async (req: Request) => {
     const { firstname, lastname, email, password, role } = req.body;
     try {
         if (!firstname) {
@@ -31,7 +31,7 @@ export const signup = async (req: Request, res: Response) => {
         user.last_name = lastname;
         user.email = email;
         user.password = hashedPassword;
-        // user.role = role;
+        user.role = role;
         const userCreated = await users.save(user);
         return { statusCode: HTTP_STATUS_CODES.CREATED, message: SUCCESS_MESSAGES._Created("User"), data: userCreated }
     } catch (error: any) {
