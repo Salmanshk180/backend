@@ -1,9 +1,10 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
-import { Products } from "../products/products.entity";
+import { Brands } from "../brands/brands.entity";
+import { Categories } from "../categories/categories.entity";
 
 @Entity()
-export class Brands extends BaseEntity {
+export class Products extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -27,10 +28,15 @@ export class Brands extends BaseEntity {
     })
     updated_at: Date;
 
-    @OneToMany(()=>Products,(product)=>product.brand,{
-        cascade: true,
-      })
-    products: Products[];
+
+    @ManyToOne(() => Brands, (brand) => brand.products, { onDelete: "CASCADE" ,eager: true})
+    @JoinColumn({ name: "brand_id" })
+    brand: Brands
+
+    @ManyToOne(() => Categories, (category) => category.products, { onDelete: "CASCADE", eager: true})
+    @JoinColumn({ name: "category_id" })
+    category: Categories
+
 
     constructor() {
         super();
