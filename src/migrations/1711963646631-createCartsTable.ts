@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
-
-export class CreateProductVariantsTable1711962148690 implements MigrationInterface {
+export class CreateCartsTable1711963646631 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "product_variants",
+                name: "carts",
                 columns: [
                     {
                         name: "id",
@@ -14,49 +13,23 @@ export class CreateProductVariantsTable1711962148690 implements MigrationInterfa
                         isNullable: false,
                     },
                     {
-                        name: "images",
-                        type: "json",
+                        name: "quantity",
+                        type: "integer",
                         isNullable: false,
+                        default: 1,
                     },
                     {
-                        name: "color",
-                        type: "varchar",
-                        isNullable: false,
-                    },
-                    {
-                        name: "price",
+                        name: "subtotal",
                         type: "integer",
                         isNullable: false,
                     },
                     {
-                        name: "discount_price",
-                        type: "integer",
-                        isNullable: true,
-                    },
-
-                    {
-                        name: "description",
-                        type: "varchar",
+                        name: "product_variant_id",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "in_stock",
-                        type: "boolean",
-                        isNullable: false,
-                    },
-                    {
-                        name: "currency",
-                        type: "enum",
-                        enum: ["USD", "INR"],
-                        isNullable: false,
-                    },
-                    {
-                        name: "default",
-                        type: "boolean",
-                        isNullable: false,
-                    },
-                    {
-                        name: "product_id",
+                        name: "user_id",
                         type: "uuid",
                         isNullable: false,
                     },
@@ -75,19 +48,23 @@ export class CreateProductVariantsTable1711962148690 implements MigrationInterfa
                 ],
                 foreignKeys: [
                     {
-                        name: "product_id",
-                        columnNames: ["product_id"],
+                        name: "product_variant_id",
+                        columnNames: ["product_variant_id"],
                         referencedColumnNames: ["id"],
-                        referencedTableName: "products",
+                        referencedTableName: "product_variants",
+                    },
+                    {
+                        name: "user_id",
+                        columnNames: ["user_id"],
+                        referencedColumnNames: ["id"],
+                        referencedTableName: "users",
                     },
                 ]
             })
         )
-
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('product_variants')
     }
 
 }

@@ -16,3 +16,9 @@ export enum Currency{
     USD = "USD",
     INR = "INR",
 }
+
+export interface Cart_Product{
+    product_variant_id: string;
+    quantity: number;
+    subtotal: number;
+}

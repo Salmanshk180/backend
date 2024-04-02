@@ -5,6 +5,7 @@ import { getAllCategories, handleCategories } from "../controllers/category/hand
 import { getAllProducts, handleProducts } from "../controllers/product/handle-product.controller";
 import { getAllUsers } from "../controllers/user/handle-user.controlles";
 import { getAllProductVariants, handleProductVariants } from "../controllers/product/handle-product-variant.controller";
+import { getAllCarts, handleCarts } from "../controllers/cart/cart.controller";
 
 export const router = Router();
 
@@ -19,3 +20,5 @@ router.post("/product", handleProducts)
 router.get("/product", getAllProducts)
 router.post("/product-variant", handleProductVariants)
 router.get("/product-variant", getAllProductVariants)
+router.post("/cart",handleCarts)
+router.get("/cart", getAllCarts)

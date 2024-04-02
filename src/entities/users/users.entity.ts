@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
+import { Carts } from "../carts/cart.entity";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -68,4 +69,7 @@ export class Users extends BaseEntity {
         this.updated_at = new Date();
         this.id = uuidv4();
     }
+
+    @OneToMany(()=>Carts,(cart)=>cart.user)
+    cart:Carts;
 }
