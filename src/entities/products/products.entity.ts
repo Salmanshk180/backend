@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Brands } from "../brands/brands.entity";
 import { Categories } from "../categories/categories.entity";
 import { ProductVariants } from "./product-variants.entity";
+import { Reviews } from "../reviews/reviews.entity";
 
 @Entity()
 export class Products extends BaseEntity {
@@ -43,6 +44,9 @@ export class Products extends BaseEntity {
     })
     product_variants: ProductVariants[];
 
+    @OneToMany(() => Reviews, (review) => review.product)
+    reviews: Reviews;
+    
     constructor() {
         super();
         this.created_at = new Date();

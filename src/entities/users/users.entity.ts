@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { Carts } from "../carts/cart.entity";
+import { Reviews } from "../reviews/reviews.entity";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -70,6 +71,9 @@ export class Users extends BaseEntity {
         this.id = uuidv4();
     }
 
-    @OneToMany(()=>Carts,(cart)=>cart.user)
-    cart:Carts;
+    @OneToMany(() => Carts, (cart) => cart.user)
+    cart: Carts;
+
+    @OneToMany(() => Reviews, (review) => review.user)
+    reviews: Reviews;
 }

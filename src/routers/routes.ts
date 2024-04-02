@@ -3,9 +3,10 @@ import { handleLogin, handleSignup } from "../controllers/authentication/handle-
 import { getAllBrands, handleBrands } from "../controllers/brand/handle-brands.controller";
 import { getAllCategories, handleCategories } from "../controllers/category/handle-categories.controller";
 import { getAllProducts, handleProducts } from "../controllers/product/handle-product.controller";
-import { getAllUsers } from "../controllers/user/handle-user.controlles";
+import { getAllUsers, getUser } from "../controllers/user/handle-user.controlles";
 import { getAllProductVariants, handleProductVariants } from "../controllers/product/handle-product-variant.controller";
 import { getAllCarts, handleCarts } from "../controllers/cart/cart.controller";
+import { getReviews, handleReview } from "../controllers/review/handle-review.controller";
 
 export const router = Router();
 
@@ -22,3 +23,6 @@ router.post("/product-variant", handleProductVariants)
 router.get("/product-variant", getAllProductVariants)
 router.post("/cart",handleCarts)
 router.get("/cart", getAllCarts)
+router.post("/review",handleReview)
+router.get("/review", getReviews)
+router.get("/user/:id", getUser)
