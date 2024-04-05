@@ -6,7 +6,7 @@ import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constant
 export const getProducts = async () => {
     try {
         const products = await Products.find()
-        return { statusCode: HTTP_STATUS_CODES.OK, message: SUCCESS_MESSAGES._Ok("Categories"), data: products }
+        return { statusCode: HTTP_STATUS_CODES.OK, message: SUCCESS_MESSAGES._Ok("Products"), data: products }
 
     } catch (error) {
         return { statusCode: HTTP_STATUS_CODES.BAD_REQUEST, message: ERROR_MESSAGE._Bad_Request() }

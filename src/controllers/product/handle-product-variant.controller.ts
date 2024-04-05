@@ -8,6 +8,6 @@ export const handleProductVariants = async (req: Request, res: Response) => {
 }
 
 export const getAllProductVariants = async (req: Request, res: Response) => {
-    const productResponse = await getProductVariants();
+    const productResponse = await getProductVariants(req);    
     return res.status(productResponse.statusCode).json({ message: productResponse.message, data: productResponse.data })
 }

@@ -1,8 +1,8 @@
 export const SUCCESS_MESSAGES = {
     _Ok(str: string) {
-      return `${str} successfully done`;
+      return `${str} successfully`;
     },
     _Created(str: string) {
-      return `${str} successfully created`;
+      return `${str} created successfully`;
     },
   };

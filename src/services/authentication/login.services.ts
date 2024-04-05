@@ -6,7 +6,6 @@ import { HTTP_STATUS_CODES } from "../../utils/constants/status-codes.constants"
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
 import bcrypt from "bcryptjs"
 import { generateToken } from "../../middlewares/auth-token.middlewares";
-
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     try {
@@ -27,7 +26,7 @@ export const login = async (req: Request, res: Response) => {
         }
         const token = generateToken(findUser)
         res.cookie("token", token)
-        return { statusCode: HTTP_STATUS_CODES.OK, message: SUCCESS_MESSAGES._Ok("User"), token: token }
+        return { statusCode: HTTP_STATUS_CODES.OK, message: SUCCESS_MESSAGES._Ok("User Loggedin"), token: token }
 
     } catch (error: any) {
         return { statusCode: HTTP_STATUS_CODES.BAD_REQUEST, message: error.message }

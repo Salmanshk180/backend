@@ -17,6 +17,6 @@ export const AppDataSource = new DataSource({
     schema: database_schema,
     entities: [Users,Brands,Categories,Products,ProductVariants,Carts,Reviews],
     // synchronize: true,
-    logging: true,
+    // logging: true,
     migrations: ["src/migrations/*.ts"],
 })

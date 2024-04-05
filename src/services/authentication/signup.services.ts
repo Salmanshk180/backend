@@ -32,7 +32,7 @@ export const signup = async (req: Request) => {
         user.last_name = lastname;
         user.email = email;
         user.password = hashedPassword;
-        user.role = role;
+        user.role = role || "User";
         const userCreated = await users.save(user);
         return { statusCode: HTTP_STATUS_CODES.CREATED, message: SUCCESS_MESSAGES._Created("User"), data: userCreated }
     } catch (error: any) {
