@@ -12,7 +12,7 @@ export class ProductVariants extends BaseEntity {
     id: string;
 
     @Column({
-        type: 'varchar',
+        type: 'json',
         nullable: false,
     })
     images: JSON;

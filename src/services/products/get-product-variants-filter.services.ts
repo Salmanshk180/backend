@@ -17,6 +17,11 @@ export const getProductVariantsFilter = async (req: Request) => {
     const maximum_price = req.query.max
       ? parseFloat(req.query.max.toString())
       : 0;
+
+    const sortby = req.query.sortby;
+    const page = Number(req.query.page!);
+    const limit = Number(req.query.limit!);
+
     const productVariantRepository =
       AppDataSource.getRepository(ProductVariants);
 
@@ -29,7 +34,7 @@ export const getProductVariantsFilter = async (req: Request) => {
     if (brands.length > 0) {
       query = query.where("LOWER(brand.name) IN (:...brands)", { brands });
     }
-    if (category_name !== "null") {
+    if (category_name !== "null" && category_name !== "all") {
       query = query.andWhere("LOWER(category.name) = :category", {
         category: category_name,
       });
@@ -42,6 +47,19 @@ export const getProductVariantsFilter = async (req: Request) => {
         .andWhere("product_variant.price <= :maximumprice", {
           maximumprice: maximum_price,
         });
+    }
+
+    if (sortby == "asc") {
+      query = query.addOrderBy("product_variant.price", "ASC");
+    }
+    if (sortby == "desc") {
+      query = query.addOrderBy("product_variant.price", "DESC");
+    }
+
+    const total = (await query.getMany()).length;
+    let skip = (page - 1) * limit;
+    if (page && limit) {
+      query = query.skip(skip).take(limit);
     }
 
     const products = await ProductVariants.find();
@@ -59,7 +77,7 @@ export const getProductVariantsFilter = async (req: Request) => {
       message: SUCCESS_MESSAGES._Ok("Product Variant"),
       data: {
         products: productVariant,
-        total: productVariant.length,
+        total: total,
         minimum_price: minimumprice,
         maximum_price: maximumprice,
       },

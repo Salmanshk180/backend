@@ -8,8 +8,6 @@ export const handleCategories = async (req: Request, res: Response) => {
 }
 
 export const getAllCategories = async (req: Request, res: Response) => {
-    const categoryResponse = await getCategories();
-    console.log(categoryResponse.data);
-    
+    const categoryResponse = await getCategories();    
     return res.status(categoryResponse.statusCode).json({ message: categoryResponse.message, data: categoryResponse.data })
 }

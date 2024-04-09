@@ -12,7 +12,11 @@ export class Categories extends BaseEntity {
         nullable: false,
     })
     name: string;
-
+    @Column({
+        type: "json",
+        nullable: true,
+    })
+    images: string;
     @Column({
         type: "timestamp",
         default: () => "CURRENT_TIMESTAMP",
