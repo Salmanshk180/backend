@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGen
 import { v4 as uuidv4 } from "uuid";
 import { Brands } from "../brands/brands.entity";
 import { Categories } from "../categories/categories.entity";
-import { Currency } from "../../types/types";
+import { Currency, SizeType } from "../../types/types";
 import { Products } from "./products.entity";
 import { Carts } from "../carts/cart.entity";
 
@@ -23,6 +23,8 @@ export class ProductVariants extends BaseEntity {
     })
     color: string;
 
+    @Column()
+    size: SizeType;
 
     @Column({
         type: 'integer',

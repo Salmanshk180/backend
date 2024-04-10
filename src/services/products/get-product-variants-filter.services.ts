@@ -17,7 +17,7 @@ export const getProductVariantsFilter = async (req: Request) => {
     const maximum_price = req.query.max
       ? parseFloat(req.query.max.toString())
       : 0;
-
+    const _default = Boolean(req.query.default);
     const sortby = req.query.sortby;
     const page = Number(req.query.page!);
     const limit = Number(req.query.limit!);
@@ -48,7 +48,11 @@ export const getProductVariantsFilter = async (req: Request) => {
           maximumprice: maximum_price,
         });
     }
-
+    if (_default) {
+      query = query.andWhere("product_variant.default = :default", {
+        default: _default,
+      });
+    }
     if (sortby == "asc") {
       query = query.addOrderBy("product_variant.price", "ASC");
     }

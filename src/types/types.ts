@@ -22,3 +22,10 @@ export interface Cart_Product{
     quantity: number;
     subtotal: number;
 }
+
+export enum SizeType {
+    SMALL = 'small',
+    MEDIUM = 'medium',
+    LARGE = 'large',
+    EXTRA_LARGE = 'extra large'
+}
