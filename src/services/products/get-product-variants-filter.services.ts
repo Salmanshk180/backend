@@ -4,6 +4,7 @@ import { ERROR_MESSAGE } from "../../utils/constants/error-message.constants";
 import { HTTP_STATUS_CODES } from "../../utils/constants/status-codes.constants";
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
 import { ProductVariants } from "../../entities/products/product-variants.entity";
+import { Products } from "../../entities/products/products.entity";
 
 export const getProductVariantsFilter = async (req: Request) => {
   try {
@@ -76,6 +77,14 @@ export const getProductVariantsFilter = async (req: Request) => {
       0
     );
     const productVariant = await query.getMany();
+    const productIds = productVariant.map((variant) => variant.product.id);
+    const productVariantswithProducts = await Promise.all(
+      productIds.map(async (productId) => {
+        return await ProductVariants.find({
+          where: { product: { id: productId } },
+        });
+      })
+    );
     return {
       statusCode: HTTP_STATUS_CODES.OK,
       message: SUCCESS_MESSAGES._Ok("Product Variant"),
@@ -84,6 +93,7 @@ export const getProductVariantsFilter = async (req: Request) => {
         total: total,
         minimum_price: minimumprice,
         maximum_price: maximumprice,
+        productVariants: productVariantswithProducts,
       },
     };
   } catch (error) {
