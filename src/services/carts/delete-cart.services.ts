@@ -3,17 +3,16 @@ import { Carts } from "../../entities/carts/cart.entity";
 import { ERROR_MESSAGE } from "../../utils/constants/error-message.constants";
 import { HTTP_STATUS_CODES } from "../../utils/constants/status-codes.constants";
 import { SUCCESS_MESSAGES } from "../../utils/constants/success-message.constants";
-import { verifyToken } from "../../middlewares/auth-token.middlewares";
 
-export const getCarts = async (req: Request) => {
+export const delete_cart = async (req: Request) => {
   try {
-    const token = req.query.token?.toString();
-    const user = verifyToken(token!);    
-    const carts = await Carts.findBy({ user: { id: user.id } });
+    const cart_id = req.query.cart_id?.toString();
+    const carts = await Carts.findBy({id:cart_id});
+    const cart = await Carts.remove(carts);
     return {
       statusCode: HTTP_STATUS_CODES.OK,
       message: SUCCESS_MESSAGES._Ok("Carts"),
-      data: carts,
+      data: cart,
     };
   } catch (error) {
     return {

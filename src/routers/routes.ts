@@ -24,7 +24,12 @@ import {
   getProductVariantsAll,
   handleProductVariants,
 } from "../controllers/product/handle-product-variant.controller";
-import { getAllCarts, handleCarts } from "../controllers/cart/cart.controller";
+import {
+  deleteCart,
+  getAllCarts,
+  handleCarts,
+  updateCart,
+} from "../controllers/cart/cart.controller";
 import {
   getReviews,
   handleReview,
@@ -48,6 +53,8 @@ router.get("/product-variant-filter", getFilterProductVariants);
 router.get("/product", getOneproduct);
 router.post("/cart", handleCarts);
 router.get("/cart", getAllCarts);
+router.patch("/cart", updateCart);
+router.delete("/cart", deleteCart);
 router.post("/review", handleReview);
 router.get("/review", getReviews);
 router.get("/user/:id", getUser);
