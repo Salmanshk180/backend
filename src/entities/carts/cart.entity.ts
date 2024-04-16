@@ -40,7 +40,7 @@ export class Carts extends BaseEntity {
    @JoinColumn({name:"product_variant_id"})
    product_variants : ProductVariants
 
-   @OneToOne(()=>Users,(user)=>user.cart)
+   @OneToOne(()=>Users,(user)=>user.cart,{cascade:true})
    @JoinColumn({name:"user_id"})
    user : Users
 

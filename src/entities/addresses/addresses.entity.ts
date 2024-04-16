@@ -3,16 +3,15 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
-import { Carts } from "../carts/cart.entity";
-import { Reviews } from "../reviews/reviews.entity";
-import { Addresses } from "../addresses/addresses.entity";
+import { Users } from "../users/users.entity";
 
 @Entity()
-export class Users extends BaseEntity {
+export class Addresses extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -20,37 +19,32 @@ export class Users extends BaseEntity {
     type: "varchar",
     nullable: false,
   })
-  first_name: string;
-
+  building: string;
   @Column({
     type: "varchar",
     nullable: false,
   })
-  last_name: string;
-
+  street: string;
   @Column({
     type: "varchar",
     nullable: false,
   })
-  email: string;
-
+  city: string;
   @Column({
     type: "varchar",
     nullable: false,
   })
-  password: string;
-
+  state: string;
   @Column({
-    type: "integer",
-    nullable: true,
+    type: "varchar",
+    nullable: false,
   })
-  phone_number: number;
-
+  pincode: number;
   @Column({
-    type: "enum",
-    enum: ["admin", "user"],
+    type: "varchar",
+    nullable: false,
   })
-  role: string;
+  country: string;
 
   @Column({
     type: "timestamp",
@@ -66,19 +60,14 @@ export class Users extends BaseEntity {
   })
   updated_at: Date;
 
+  @ManyToOne(() => Users, (user) => user.address)
+  @JoinColumn({ name: "user_id" })
+  user: Users;
+
   constructor() {
     super();
     this.created_at = new Date();
     this.updated_at = new Date();
     this.id = uuidv4();
   }
-
-  @OneToMany(() => Carts, (cart) => cart.user,{onDelete:"CASCADE"})
-  cart: Carts;
-
-  @OneToMany(() => Addresses, (address) => address.user)
-  address: Addresses;
-
-  @OneToMany(() => Reviews, (review) => review.user)
-  reviews: Reviews;
 }

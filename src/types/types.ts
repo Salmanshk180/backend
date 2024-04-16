@@ -5,7 +5,6 @@ export interface User {
     last_name: string;
     email: string;
     password: string;
-    address?: string;
     phone_number?: number;
     role: string;
     created_at: Date;

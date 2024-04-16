@@ -38,7 +38,7 @@ export class Reviews extends BaseEntity {
     @JoinColumn({name:"user_id"})
     user:Users
 
-    @ManyToOne(()=>Products,(product)=>product.reviews)
+    @ManyToOne(()=>Products,(product)=>product.reviews,)
     @JoinColumn({name:"product_id"})
     product:Products
     constructor() {
