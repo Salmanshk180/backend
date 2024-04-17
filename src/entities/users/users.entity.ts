@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Carts } from "../carts/cart.entity";
 import { Reviews } from "../reviews/reviews.entity";
 import { Addresses } from "../addresses/addresses.entity";
+import { OrderHistory } from "../order-history/order-history.entity";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -73,11 +74,13 @@ export class Users extends BaseEntity {
     this.id = uuidv4();
   }
 
-  @OneToMany(() => Carts, (cart) => cart.user,{onDelete:"CASCADE"})
+  @OneToMany(() => Carts, (cart) => cart.user, { onDelete: "CASCADE" })
   cart: Carts;
 
   @OneToMany(() => Addresses, (address) => address.user)
   address: Addresses;
+  @OneToMany(() => OrderHistory, (order) => order.user)
+  order: OrderHistory;
 
   @OneToMany(() => Reviews, (review) => review.user)
   reviews: Reviews;

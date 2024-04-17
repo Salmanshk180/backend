@@ -8,44 +8,38 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
+import { Products } from "../products/products.entity";
+import { Addresses } from "../addresses/addresses.entity";
 import { Users } from "../users/users.entity";
-import { OrderHistory } from "../order-history/order-history.entity";
 
 @Entity()
-export class Addresses extends BaseEntity {
+export class OrderHistory extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({
-    type: "varchar",
+    type: "integer",
     nullable: false,
   })
-  building: string;
+  quantity: number;
+
+  @Column({
+    type: "integer",
+    nullable: false,
+  })
+  total: number;
+
+  @Column({
+    type: "jsonb",
+    nullable: false,
+  })
+  metadata: Array<Object>;
+
   @Column({
     type: "varchar",
     nullable: false,
   })
-  street: string;
-  @Column({
-    type: "varchar",
-    nullable: false,
-  })
-  city: string;
-  @Column({
-    type: "varchar",
-    nullable: false,
-  })
-  state: string;
-  @Column({
-    type: "varchar",
-    nullable: false,
-  })
-  pincode: number;
-  @Column({
-    type: "varchar",
-    nullable: false,
-  })
-  country: string;
+  order_status: string;
 
   @Column({
     type: "timestamp",
@@ -61,14 +55,13 @@ export class Addresses extends BaseEntity {
   })
   updated_at: Date;
 
-  @ManyToOne(() => Users, (user) => user.address)
+  @ManyToOne(() => Addresses, (address) => address.order)
+  @JoinColumn({ name: "address_id" })
+  address: Addresses;
+
+  @ManyToOne(() => Users, (user) => user.order)
   @JoinColumn({ name: "user_id" })
   user: Users;
-
-  @OneToMany(() => OrderHistory, (order) => order.address, {
-    cascade: true,
-  })
-  order: OrderHistory[];
   constructor() {
     super();
     this.created_at = new Date();
