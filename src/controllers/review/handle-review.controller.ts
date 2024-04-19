@@ -8,6 +8,6 @@ export const handleReview = async (req: Request, res: Response) => {
 }
 
 export const getReviews = async (req: Request, res: Response) =>{
-    const reviewResponse = await getAllReviews();
-    return res.status(reviewResponse.statusCode).json({ message: reviewResponse.message, id: reviewResponse.data })
+    const reviewResponse = await getAllReviews(req);
+    return res.status(reviewResponse.statusCode).json({ message: reviewResponse.message, data: reviewResponse.data })
 }

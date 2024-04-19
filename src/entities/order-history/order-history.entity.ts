@@ -55,11 +55,11 @@ export class OrderHistory extends BaseEntity {
   })
   updated_at: Date;
 
-  @ManyToOne(() => Addresses, (address) => address.order)
+  @ManyToOne(() => Addresses, (address) => address.order,{eager:true})
   @JoinColumn({ name: "address_id" })
   address: Addresses;
 
-  @ManyToOne(() => Users, (user) => user.order)
+  @ManyToOne(() => Users, (user) => user.order,{eager: true})
   @JoinColumn({ name: "user_id" })
   user: Users;
   constructor() {

@@ -1,10 +1,11 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { Brands } from "../brands/brands.entity";
 import { Categories } from "../categories/categories.entity";
 import { Currency, SizeType } from "../../types/types";
 import { Products } from "./products.entity";
 import { Carts } from "../carts/cart.entity";
+import { Reviews } from "../reviews/reviews.entity";
 
 @Entity()
 export class ProductVariants extends BaseEntity {
@@ -85,6 +86,8 @@ export class ProductVariants extends BaseEntity {
     @OneToOne(() => Carts, (product) => product.product_variants)
     cart: Carts
     
+    @OneToMany(() => Reviews, (review) => review.product_variant)
+    reviews: Reviews;
 
     constructor() {
         super();

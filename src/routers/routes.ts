@@ -38,7 +38,7 @@ import {
 } from "../controllers/review/handle-review.controller";
 import { getFilterProductVariants } from "../controllers/product/handle-product-variant.controller";
 import { deleteAddresses, getAddresses, handleAddresses, updateAddress } from "../controllers/address/handle-address.controller";
-import { handleOrder } from "../controllers/order/handle-order";
+import { getOrder, getOrderByIds, handleOrder } from "../controllers/order/handle-order";
 
 export const router = Router();
 
@@ -60,7 +60,7 @@ router.get("/cart", getAllCarts);
 router.patch("/cart", updateCart);
 router.delete("/cart", deleteCart);
 router.post("/review", handleReview);
-router.get("/review", getReviews);
+router.get("/review/:id", getReviews);
 router.post("/address/:id", handleAddresses);
 router.get("/address/:id", getAddresses);
 router.delete("/address/:id", deleteAddresses);
@@ -69,3 +69,5 @@ router.get("/user", getUser);
 router.delete("/user/:id", deleteUser);
 router.patch("/address/:id", updateAddress);
 router.post("/order/:id", handleOrder);
+router.get("/order", getOrder);
+router.get("/order/:id", getOrderByIds);
