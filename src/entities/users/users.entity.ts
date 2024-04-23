@@ -11,6 +11,7 @@ import { Carts } from "../carts/cart.entity";
 import { Reviews } from "../reviews/reviews.entity";
 import { Addresses } from "../addresses/addresses.entity";
 import { OrderHistory } from "../order-history/order-history.entity";
+import { Watchlist } from "../watchlist/watchlist.entity";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -76,6 +77,9 @@ export class Users extends BaseEntity {
 
   @OneToMany(() => Carts, (cart) => cart.user, { onDelete: "CASCADE" })
   cart: Carts;
+  
+  @OneToMany(() => Watchlist, (list) => list.user, { onDelete: "CASCADE" })
+  watchlist: Watchlist;
 
   @OneToMany(() => Addresses, (address) => address.user)
   address: Addresses;

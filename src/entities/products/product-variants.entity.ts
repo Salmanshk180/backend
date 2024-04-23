@@ -6,6 +6,7 @@ import { Currency, SizeType } from "../../types/types";
 import { Products } from "./products.entity";
 import { Carts } from "../carts/cart.entity";
 import { Reviews } from "../reviews/reviews.entity";
+import { Watchlist } from "../watchlist/watchlist.entity";
 
 @Entity()
 export class ProductVariants extends BaseEntity {
@@ -85,6 +86,9 @@ export class ProductVariants extends BaseEntity {
 
     @OneToOne(() => Carts, (product) => product.product_variants)
     cart: Carts
+    
+    @OneToOne(() => Watchlist, (product) => product.product_variants)
+    watchlist: Watchlist
     
     @OneToMany(() => Reviews, (review) => review.product_variant)
     reviews: Reviews;

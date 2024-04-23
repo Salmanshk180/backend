@@ -39,6 +39,7 @@ import {
 import { getFilterProductVariants } from "../controllers/product/handle-product-variant.controller";
 import { deleteAddresses, getAddresses, handleAddresses, updateAddress } from "../controllers/address/handle-address.controller";
 import { getOrder, getOrderByIds, handleOrder } from "../controllers/order/handle-order";
+import { getWatchlist, handleWatchlist } from "../controllers/watchlist/watchlist.controller";
 
 export const router = Router();
 
@@ -71,3 +72,5 @@ router.patch("/address/:id", updateAddress);
 router.post("/order/:id", handleOrder);
 router.get("/order", getOrder);
 router.get("/order/:id", getOrderByIds);
+router.post("/watchlist", handleWatchlist);
+router.get("/watchlist", getWatchlist);

@@ -9,6 +9,7 @@ import { Carts } from "../entities/carts/cart.entity";
 import { Reviews } from "../entities/reviews/reviews.entity";
 import { Addresses } from "../entities/addresses/addresses.entity";
 import { OrderHistory } from "../entities/order-history/order-history.entity";
+import { Watchlist } from "../entities/watchlist/watchlist.entity";
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: databse_host,
@@ -17,7 +18,7 @@ export const AppDataSource = new DataSource({
     password: database_password,
     database: database_name,
     schema: database_schema,
-    entities: [Users,Brands,Categories,Products,ProductVariants,Carts,Reviews,Addresses,OrderHistory],
+    entities: [Users,Brands,Categories,Products,ProductVariants,Carts,Reviews,Addresses,OrderHistory,Watchlist],
     // synchronize: true,
     // logging: true,
     migrations: ["src/migrations/*.ts"],

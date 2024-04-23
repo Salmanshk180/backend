@@ -4,21 +4,9 @@ import { ProductVariants } from "../products/product-variants.entity";
 import { Users } from "../users/users.entity";
 
 @Entity()
-export class Carts extends BaseEntity {
+export class Watchlist extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
-
-    @Column({
-        type: 'integer',
-        nullable: false,
-    })
-    quantity: number;
-
-    @Column({
-        type: 'integer',
-        nullable: false,
-    })
-    subtotal: number;
 
     @Column({
         type: "timestamp",

@@ -12,11 +12,10 @@ export const update_cart = async (req: Request) => {
     const carts = await Carts.findOneBy({
       product_variants: { id: product_variant_id },
     });
-
+    
     carts!.quantity = +quantity!;
     carts!.subtotal =
-      Number(carts?.product_variants.discount_price) * +quantity!;
-
+    Number(carts?.product_variants.discount_price ? carts!.product_variants.discount_price :carts!.product_variants.price) * carts!.quantity;
     const cart = await Carts.save(carts!);
     return {
       statusCode: HTTP_STATUS_CODES.OK,

@@ -15,6 +15,7 @@ export const getAllCarts = async (req: Request, res: Response) => {
 }
 export const updateCart = async (req: Request, res: Response) => {
     const categoryResponse = await update_cart(req);
+    
    return res.status(categoryResponse.statusCode).json({ message: categoryResponse.message, data: categoryResponse.data})
 }
 export const deleteCart = async (req: Request, res: Response) => {
